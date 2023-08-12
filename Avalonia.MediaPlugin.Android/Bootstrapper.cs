@@ -32,15 +32,10 @@ namespace Avalonia.MediaPlugin.Android
 
         static void onPermissions()
         {
-
             var locationPermissions = new[]
             {
                 Manifest.Permission.AccessCoarseLocation,
                 Manifest.Permission.AccessFineLocation,
-                Manifest.Permission.AccessLocationExtraCommands,
-                Manifest.Permission.BluetoothConnect,
-                Manifest.Permission.BluetoothScan,
-                Manifest.Permission.BluetoothPrivileged,
                 Manifest.Permission.Camera
             };
 
