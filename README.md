@@ -17,13 +17,11 @@ Call **CrossMedia.Current** from any project or PCL to gain access to APIs.
 
 Before taking photos or videos you should check to see if a camera exists and if photos and videos are supported on the device. There are five properties that you can check:
 
-## Android 
+#### Android 
 
  **UseMediaPlugin(this)**
 
 ```csharp
-
-
 protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
         return base.CustomizeAppBuilder(builder)
@@ -35,6 +33,17 @@ protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
 
 #### iOS
 
+ **UseMediaPlugin()**
+ 
+```csharp
+protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
+    {
+        return base.CustomizeAppBuilder(builder)
+            .WithInterFont()
+            .UseMediaPlugin()
+            .UseReactiveUI();
+    }
+```
 Your app is required to have keys in your Info.plist for `NSCameraUsageDescription` and `NSPhotoLibraryUsageDescription` in order to access the device's camera and photo/video library. If you are using the Video capabilities of the library then you must also add `NSMicrophoneUsageDescription`.  If you want to "SaveToGallery" then you must add the `NSPhotoLibraryAddUsageDescription` key into your info.plist. The string that you provide for each of these keys will be displayed to the user when they are prompted to provide permission to access these device features. You can read me here: [New iOS 10 Privacy Permission Settings](https://devblogs.microsoft.com/xamarin/new-ios-10-privacy-permission-settings?WT.mc_id=friends-0000-jamont)
 
 Such as:
