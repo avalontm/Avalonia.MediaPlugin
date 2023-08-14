@@ -36,11 +36,7 @@ namespace Avalonia.Permissions
 
         static IPermissions CreatePermissions()
         {
-#if NETSTANDARD
-            return null;
-#else
             return Locator.Current.GetService<IPermissions>();
-#endif
         }
 
         internal static Exception NotImplementedInReferenceAssembly() =>

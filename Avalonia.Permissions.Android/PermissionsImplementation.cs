@@ -19,7 +19,6 @@ using Android.OS;
 using PM = Android.Content.PM;
 using Uri = Android.Net.Uri;
 using Provider = Android.Provider;
-using Avalonia.MediaPlugin.Android;
 
 [assembly: LinkerSafe]
 namespace Avalonia.Permissions.Android

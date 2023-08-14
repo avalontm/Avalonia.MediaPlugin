@@ -8,12 +8,11 @@ using Avalonia.Permissions.Android;
 using Splat;
 
 
-namespace Avalonia.MediaPlugin.Android
+namespace Avalonia.Permissions.Android
 {
     [Preserve(AllMembers = true)]
     public static class Bootstrapper
     {
-        const int locationPermissionsRequestCode = 1000;
         public static Activity? Context { get; private set; }
 
         public static void Register(IMutableDependencyResolver services, IReadonlyDependencyResolver resolver)

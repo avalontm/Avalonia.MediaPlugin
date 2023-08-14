@@ -20,6 +20,8 @@ using Android.Runtime;
 using Avalonia.MediaPlugin.Abstractions;
 using Orientation = Android.Media.Orientation;
 using AndroidX.Core.Content;
+using Avalonia.Permissions.Abstractions;
+using Avalonia.Permissions;
 
 namespace Avalonia.MediaPlugin.Android
 {
@@ -305,34 +307,34 @@ namespace Avalonia.MediaPlugin.Android
 
             var checkCamera = HasPermissionInManifest(Manifest.Permission.Camera);
 
-            var hasCameraPermission = Permission.Granted;
+            var hasCameraPermission = Avalonia.Permissions.Abstractions.PermissionStatus.Granted;
             if (checkCamera)
-                hasCameraPermission = ContextCompat.CheckSelfPermission(Bootstrapper.Context, Manifest.Permission.Camera);
+                hasCameraPermission = await CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>();
 
 
             var permissions = new List<string>();
 
             var camera = nameof(Manifest.Permission.Camera);
 
-            if (hasCameraPermission != Permission.Granted)
+            if (hasCameraPermission != Avalonia.Permissions.Abstractions.PermissionStatus.Granted)
                 permissions.Add(camera);
 
 
             if (permissions.Count == 0) //good to go!
                 return true;
 
-            var results = new Dictionary<string, Permission>();
+            var results = new Dictionary<string, Avalonia.Permissions.Abstractions.PermissionStatus>();
             foreach (var permission in permissions)
             {
                 switch (permission)
                 {
                     case nameof(Manifest.Permission.Camera):
-                        results.Add(permission, ContextCompat.CheckSelfPermission(Bootstrapper.Context, Manifest.Permission.Camera));
+                        results.Add(permission, await CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>());
                         break;
                 }
             }
 
-            if (results.ContainsKey(camera) && results[camera] != Permission.Granted)
+            if (results.ContainsKey(camera) && results[camera] != Avalonia.Permissions.Abstractions.PermissionStatus.Granted)
             {
                 Console.WriteLine("Camera permission Denied.");
                 return false;
