@@ -13,24 +13,11 @@ using System.Security.Permissions;
 using AVFoundation;
 using Photos;
 using System.Security.Cryptography;
+using Avalonia.Permissions.Abstractions;
+using Avalonia.Permissions;
 
 namespace Avalonia.MediaPlugin.iOS
 {
-    public enum Permissions
-    {
-        Camera,
-        Photos,
-        Microphone
-    }
-
-    public enum PermissionStatus
-    {
-        NotDetermined,
-        Authorized,
-        Denied,
-        Restricted
-    }
-
     /// <summary>
     /// Implementation for Media
     /// </summary>
@@ -96,7 +83,7 @@ namespace Avalonia.MediaPlugin.iOS
             {
                 CheckUsageDescription(photoDescription);
 
-                await CheckPermissions(nameof(Permissions.Photos));
+                await CheckPermissions(nameof(Avalonia.Permissions.Abstractions.Permission.Photos));
             }
 
             var cameraOptions = new StoreCameraMediaOptions
@@ -125,7 +112,7 @@ namespace Avalonia.MediaPlugin.iOS
             {
                 CheckUsageDescription(photoDescription);
 
-                await CheckPermissions(nameof(Permissions.Photos));
+                await CheckPermissions(nameof(Avalonia.Permissions.Abstractions.Permission.Photos));
             }
 
             var cameraOptions = new StoreCameraMediaOptions
@@ -162,9 +149,9 @@ namespace Avalonia.MediaPlugin.iOS
 
             VerifyCameraOptions(options);
 
-            var permissionsToCheck = new List<string> { nameof(Permissions.Camera) };
+            var permissionsToCheck = new List<string> { nameof(Avalonia.Permissions.Abstractions.Permission.Camera) };
             if (options.SaveToAlbum)
-                permissionsToCheck.Add(nameof(Permissions.Photos));
+                permissionsToCheck.Add(nameof(Avalonia.Permissions.Abstractions.Permission.Photos));
 
             await CheckPermissions(permissionsToCheck.ToArray());
 
@@ -188,7 +175,7 @@ namespace Avalonia.MediaPlugin.iOS
             if (!UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
             {
                 CheckUsageDescription(photoDescription);
-                await CheckPermissions(nameof(Permissions.Photos));
+                await CheckPermissions(nameof(Avalonia.Permissions.Abstractions.Permission.Photos));
             }
 
             var media = await GetMediaAsync(UIImagePickerControllerSourceType.PhotoLibrary, TypeMovie, token: token);
@@ -218,9 +205,9 @@ namespace Avalonia.MediaPlugin.iOS
 
             VerifyCameraOptions(options);
 
-            var permissionsToCheck = new List<string> { nameof(Permissions.Camera), nameof(Permissions.Microphone) };
+            var permissionsToCheck = new List<string> { nameof(Avalonia.Permissions.Abstractions.Permission.Camera), nameof(Avalonia.Permissions.Abstractions.Permission.Microphone) };
             if (options.SaveToAlbum)
-                permissionsToCheck.Add(nameof(Permissions.Photos));
+                permissionsToCheck.Add(nameof(Avalonia.Permissions.Abstractions.Permission.Photos));
 
             await CheckPermissions(permissionsToCheck.ToArray());
 
@@ -565,129 +552,53 @@ namespace Avalonia.MediaPlugin.iOS
             var permissionsToRequest = new List<string>();
             foreach (var permission in permissions)
             {
-                bool permissionStatus = false;
-            
+                var permissionStatus = PermissionStatus.Unknown;
                 switch (permission)
                 {
-                    case "video":
-                        permissionStatus = CheckCameraPermission();
+                    case nameof(Avalonia.Permissions.Abstractions.Permission.Camera):
+                        permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<CameraPermission>();
                         break;
-                    case "photo":
-                        permissionStatus = CheckPhotoPermission();
+                    case nameof(Avalonia.Permissions.Abstractions.Permission.Photos):
+                        permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<PhotosPermission>();
                         break;
-                    case "microphone":
-                        permissionStatus = CheckMicrophonePermission();
+                    case nameof(Avalonia.Permissions.Abstractions.Permission.Microphone):
+                        permissionStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<MicrophonePermission>();
                         break;
                 }
 
-                if (permissionStatus)
-                {
+                if (permissionStatus != PermissionStatus.Granted)
                     permissionsToRequest.Add(permission);
-                }
             }
 
             //Nothing to request, Awesome!
             if (permissionsToRequest.Count == 0)
                 return;
 
-            var results = new Dictionary<string, bool>();
-
+            var results = new Dictionary<string, Avalonia.Permissions.Abstractions.PermissionStatus>();
             foreach (var permission in permissions)
             {
                 switch (permission)
                 {
-                    case "camera":
-                        results.Add(permission, await RequestPermissionAsync(Permissions.Camera));
+                    case nameof(Avalonia.Permissions.Abstractions.Permission.Camera):
+                        results.Add(permission, await CrossPermissions.Current.RequestPermissionAsync<CameraPermission>());
                         break;
-                    case "photo":
-                        results.Add(permission, await RequestPermissionAsync(Permissions.Photos));
+                    case nameof(Avalonia.Permissions.Abstractions.Permission.Photos):
+                        results.Add(permission, await CrossPermissions.Current.RequestPermissionAsync<PhotosPermission>());
                         break;
-                    case "microphone":
-                        results.Add(permission, await RequestPermissionAsync(Permissions.Microphone));
+                    case nameof(Avalonia.Permissions.Abstractions.Permission.Microphone):
+                        results.Add(permission, await CrossPermissions.Current.RequestPermissionAsync<MicrophonePermission>());
                         break;
                 }
             }
 
             //check for anything not granted, if none, Awesome!
-            var notGranted = results.Where(r => r.Value != true);
+            var notGranted = results.Where(r => r.Value != PermissionStatus.Granted);
             if (notGranted.Count() == 0)
                 return;
 
             //Gunna need those permissions :(
             throw new MediaPermissionException(notGranted.Select(r => r.Key).ToArray());
 
-        }
-
-        static async Task<bool> RequestPermissionAsync(Permissions permissionType)
-        {
-            UIAlertController alertController = UIAlertController.Create(
-                "Permission Required",
-                $"This app requires access to your {permissionType}.",
-                UIAlertControllerStyle.Alert
-            );
-
-            UIAlertAction grantAction = UIAlertAction.Create("Grant", UIAlertActionStyle.Default, async (_) =>
-            {
-                if (permissionType == Permissions.Camera)
-                {
-                    await AVCaptureDevice.RequestAccessForMediaTypeAsync(AVAuthorizationMediaType.Video);
-                }
-                else if (permissionType == Permissions.Photos)
-                {
-                    await PHPhotoLibrary.RequestAuthorizationAsync();
-                }
-                else if (permissionType == Permissions.Microphone)
-                {
-                    AVAudioSession audioSession = AVAudioSession.SharedInstance();
-                    audioSession.RequestRecordPermission(new AVPermissionGranted((status) => {
-                 
-                }));
-                }
-            });
-
-            UIAlertAction cancelAction = UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, null);
-
-            alertController.AddAction(grantAction);
-            alertController.AddAction(cancelAction);
-
-            //PresentViewController(alertController, true, null);
-
-            return false; // Cambiar al estado correcto después de la solicitud
-        }
-
-
-        static bool CheckCameraPermission()
-        {
-            AVAuthorizationStatus cameraAuthorizationStatus = AVCaptureDevice.GetAuthorizationStatus(AVAuthorizationMediaType.Video);
-
-            if (cameraAuthorizationStatus != AVAuthorizationStatus.Authorized)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        static bool CheckPhotoPermission()
-        {
-            PHAuthorizationStatus photoAuthorizationStatus = PHPhotoLibrary.AuthorizationStatus;
-
-            if (photoAuthorizationStatus != PHAuthorizationStatus.Authorized)
-            {
-                return false;
-            }
-            return true;
-        }
-
-        static bool CheckMicrophonePermission()
-        {
-            AVAudioSession audioSession = AVAudioSession.SharedInstance();
-            AVAudioSessionRecordPermission microphonePermission = audioSession.RecordPermission;
-
-            if (microphonePermission != AVAudioSessionRecordPermission.Granted)
-            {
-                return false;
-            }
-            return true;
         }
 
         const string cameraDescription = "NSCameraUsageDescription";

@@ -3,17 +3,32 @@
   <PropertyGroup>
 	  <TargetFramework>net7.0-android</TargetFramework>
 	  <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+	  <Version>1.0.1</Version>
 	  <Nullable>enable</Nullable>
 	  <ImplicitUsings>enable</ImplicitUsings>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <PackageId>AvalonTM.MediaPlugin.Android</PackageId>
+	  <Title>Media Plugin for Avalonia, Android</Title>
+	  <Description>Take or pick photos and videos from a cross platform API.</Description>
+	  <Copyright>Copyright 2023</Copyright>
+	  <PackageProjectUrl>https://github.com/avalontm/Avalonia.MediaPlugin</PackageProjectUrl>
+	  <PackageIcon>mediaplugin_icon.png</PackageIcon>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>avalonia</PackageTags>
+	  <RepositoryUrl>https://github.com/avalontm/Avalonia.MediaPlugin</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia.Android" Version="11.0.3" />
-    <PackageReference Include="Splat" Version="14.4.1" />
+    <None Include="..\..\..\Users\PC\Desktop\mediaplugin_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Avalonia.MediaPlugin\Avalonia.MediaPlugin.csproj" />
+    <PackageReference Include="Avalonia.Android" Version="11.0.3" />
+    <PackageReference Include="AvalonTM.MediaPlugin" Version="1.0.0" />
+    <PackageReference Include="Splat" Version="14.4.1" />
   </ItemGroup>
 
 </Project>

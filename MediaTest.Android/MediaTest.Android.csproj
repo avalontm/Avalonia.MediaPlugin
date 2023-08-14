@@ -25,6 +25,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Avalonia.MediaPlugin.Android\Avalonia.MediaPlugin.Android.csproj" />
     <ProjectReference Include="..\Avalonia.MediaPlugin\Avalonia.MediaPlugin.csproj" />
+    <ProjectReference Include="..\Avalonia.Permissions.Android\Avalonia.Permissions.Android.csproj" />
+    <ProjectReference Include="..\Avalonia.Plugin.Permissions\Avalonia.Permissions.csproj" />
     <ProjectReference Include="..\MediaTest\MediaTest.csproj" />
   </ItemGroup>
 </Project>

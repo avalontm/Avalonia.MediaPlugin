@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.iOS;
+using Avalonia.MediaPlugin.iOS;
 using Avalonia.ReactiveUI;
 
 using Foundation;
@@ -16,6 +17,7 @@ public partial class AppDelegate : AvaloniaAppDelegate<App>
     {
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
+            .UseMediaPlugin()
             .UseReactiveUI();
     }
 }

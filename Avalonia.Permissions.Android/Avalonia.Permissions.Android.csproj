@@ -4,12 +4,27 @@
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <PackageId>AvalonTM.Permissions.Android</PackageId>
+	  <Title>Permissions for Avalonia</Title>
+	  <Description>Permissions for avalonia apps</Description>
+	  <Copyright>Copyright 2023</Copyright>
+	  <PackageProjectUrl>https://github.com/avalontm/Avalonia.MediaPlugin</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/avalontm/Avalonia.MediaPlugin</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>permissions, avalonia</PackageTags>
+	  <PackageIcon>pluginpermissions_icon.png</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Android" Version="11.0.3" />
-    <PackageReference Include="Splat" Version="14.7.1" />
+    <None Include="..\..\..\Users\PC\Desktop\pluginpermissions_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
+	
   <ItemGroup>
-    <ProjectReference Include="..\Avalonia.Plugin.Permissions\Avalonia.Permissions.csproj" />
+    <PackageReference Include="Avalonia.Android" Version="11.0.3" />
+    <PackageReference Include="Splat" Version="14.4.1" />
+	<PackageReference Include="AvalonTM.Permissions" Version="1.0.0" />
   </ItemGroup>
+  
 </Project>

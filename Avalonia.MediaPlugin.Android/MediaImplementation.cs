@@ -26,7 +26,7 @@ namespace Avalonia.MediaPlugin.Android
     /// <summary>
     /// Implementation for Feature
     /// </summary>
-     [Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class MediaImplementation : IMedia
     {
         const string pixelXDimens = "PixelXDimension";

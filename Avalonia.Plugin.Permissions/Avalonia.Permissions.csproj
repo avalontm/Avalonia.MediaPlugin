@@ -4,7 +4,24 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<PackageId>AvalonTM.Permissions</PackageId>
+    <Title>Permissions for Avalonia</Title>
+    <Description>Permissions for avalonia apps</Description>
+    <Copyright>Copyright 2023</Copyright>
+    <PackageProjectUrl>https://github.com/avalontm/Avalonia.MediaPlugin</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/avalontm/Avalonia.MediaPlugin</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>permissions, avalonia</PackageTags>
+    <PackageIcon>pluginpermissions_icon.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\Users\PC\Desktop\pluginpermissions_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.3" />

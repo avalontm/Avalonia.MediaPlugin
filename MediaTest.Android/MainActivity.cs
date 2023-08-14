@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
 using Avalonia.MediaPlugin.Android;
+using Avalonia.Permissions.Android;
 using Avalonia.ReactiveUI;
 
 namespace MediaTest.Android;
@@ -22,5 +23,11 @@ public class MainActivity : AvaloniaMainActivity<App>
             .WithInterFont()
             .UseMediaPlugin(this)
             .UseReactiveUI();
+    }
+
+    public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+    {
+        PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

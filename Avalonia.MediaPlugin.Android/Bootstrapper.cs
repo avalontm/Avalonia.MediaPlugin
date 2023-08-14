@@ -23,30 +23,9 @@ namespace Avalonia.MediaPlugin.Android
         public static Avalonia.AppBuilder UseMediaPlugin(this Avalonia.AppBuilder builder, Activity activity)
         {
             Context = activity;
-            //Registramos 
             Register(Locator.CurrentMutable, Locator.Current);
-            onPermissions();
 
             return builder;
-        }
-
-        static void onPermissions()
-        {
-            var locationPermissions = new[]
-            {
-                Manifest.Permission.AccessCoarseLocation,
-                Manifest.Permission.AccessFineLocation,
-                Manifest.Permission.Camera
-            };
-
-            var cameraPermissionGranted = ContextCompat.CheckSelfPermission(Context, Manifest.Permission.Camera);
-
-            // if either is denied permission, request permission from the user
-            if (cameraPermissionGranted == Permission.Denied)
-            {
-                ActivityCompat.RequestPermissions(Context, locationPermissions, locationPermissionsRequestCode);
-            }
-
         }
     }
 }

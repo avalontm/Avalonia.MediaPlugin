@@ -1,16 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-ios</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>true</ImplicitUsings>
-    <IsBindingProject>true</IsBindingProject>
+	  <TargetFramework>net7.0-ios</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>true</ImplicitUsings>
+	  <PackageId>AvalonTM.MediaPlugin.iOS</PackageId>
+	  <Title>Media Plugin for Avalonia, iOS</Title>
+	  <Description>Take or pick photos and videos from a cross platform API.</Description>
+	  <Copyright>Copyright 2023</Copyright>
+	  <PackageProjectUrl>https://github.com/avalontm/Avalonia.MediaPlugin</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/avalontm/Avalonia.MediaPlugin</RepositoryUrl>
+	  <PackageIcon>mediaplugin_icon.png</PackageIcon>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>avalonia</PackageTags>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Users\PC\Desktop\mediaplugin_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+	
   <ItemGroup>
     <PackageReference Include="Avalonia.iOS" Version="11.0.3" />
     <PackageReference Include="Splat" Version="14.4.1" />
   </ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\Avalonia.MediaPlugin\Avalonia.MediaPlugin.csproj" />
   </ItemGroup>
-
+	
 </Project>
