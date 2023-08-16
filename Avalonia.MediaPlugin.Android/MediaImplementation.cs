@@ -1,27 +1,18 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Android;
 using Android.Content;
 using Android.Content.PM;
+using Android.Graphics;
+using Android.Media;
 using Android.OS;
 using Android.Provider;
-
-using Android.Media;
-using Android.Graphics;
-using GMatrix = Android.Graphics.Matrix;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Linq;
-using Android.App;
-using App = Android.App.Application;
-using Android;
 using Android.Runtime;
 using Avalonia.MediaPlugin.Abstractions;
-using Orientation = Android.Media.Orientation;
-using AndroidX.Core.Content;
-using Avalonia.Permissions.Abstractions;
 using Avalonia.Permissions;
+using Avalonia.Permissions.Abstractions;
+using System.Text.RegularExpressions;
+using App = Android.App.Application;
+using GMatrix = Android.Graphics.Matrix;
+using Orientation = Android.Media.Orientation;
 
 namespace Avalonia.MediaPlugin.Android
 {
