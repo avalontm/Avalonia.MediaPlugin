@@ -4,7 +4,7 @@ using Avalonia.Permissions.iOS;
 using Splat;
 
 
-namespace Avalonia.MediaPlugin.Android
+namespace Avalonia.MediaPlugin.iOS
 {
     [Preserve(AllMembers = true)]
     public static class Bootstrapper

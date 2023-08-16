@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net7.0-android</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
-	  <Version>1.0.2</Version>
+	<Version>1.0.2</Version>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <PackageId>AvalonTM.Permissions.Android</PackageId>

@@ -3,8 +3,28 @@
     <TargetFramework>net7.0-ios</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
+	  <Version>1.0.2</Version>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <PackageId>AvalonTM.Permissions.iOS</PackageId>
+	  <Title>Permissions for Avalonia</Title>
+	  <Description>Permissions for avalonia apps</Description>
+	  <Copyright>Copyright 2023</Copyright>
+	  <PackageProjectUrl>https://github.com/avalontm/Avalonia.MediaPlugin</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/avalontm/Avalonia.MediaPlugin</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <PackageTags>permissions, avalonia</PackageTags>
+	  <PackageIcon>pluginpermissions_icon.png</PackageIcon>
   </PropertyGroup>
+	
   <ItemGroup>
-    <ProjectReference Include="..\Avalonia.Plugin.Permissions\Avalonia.Permissions.csproj" />
+	  <PackageReference Include="AvalonTM.Permissions" Version="1.0.0" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Update="pluginpermissions_icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>

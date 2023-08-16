@@ -14,13 +14,11 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.iOS" Version="11.0.3" />
+    <PackageReference Include="AvalonTM.MediaPlugin.iOS" Version="1.0.2" />
+    <PackageReference Include="AvalonTM.Permissions.iOS" Version="1.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Avalonia.MediaPlugin.iOS\Avalonia.MediaPlugin.iOS.csproj" />
-    <ProjectReference Include="..\Avalonia.MediaPlugin\Avalonia.MediaPlugin.csproj" />
-    <ProjectReference Include="..\Avalonia.Permissions.iOS\Avalonia.Permissions.iOS.csproj" />
-    <ProjectReference Include="..\Avalonia.Plugin.Permissions\Avalonia.Permissions.csproj" />
     <ProjectReference Include="..\MediaTest\MediaTest.csproj" />
   </ItemGroup>
 </Project>

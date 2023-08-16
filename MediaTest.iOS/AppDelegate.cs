@@ -18,6 +18,7 @@ public partial class AppDelegate : AvaloniaAppDelegate<App>
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseMediaPlugin()
+            .UsePermissions()
             .UseReactiveUI();
     }
 }
