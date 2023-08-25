@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFramework>net7.0-android</TargetFramework>
+	  <TargetFramework>net6.0-android</TargetFramework>
 	  <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
-	  <Version>1.0.3</Version>
+	  <Version>1.0.4</Version>
 	  <Nullable>enable</Nullable>
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -27,10 +27,10 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Android" Version="11.0.1" />
-    <PackageReference Include="AvalonTM.Permissions" Version="1.0.3" />
+    <PackageReference Include="AvalonTM.Permissions.Android" Version="1.0.4" />
     <PackageReference Include="Splat" Version="14.4.1" />
-    <PackageReference Include="AvalonTM.MediaPlugin" Version="1.0.3" />
-    <PackageReference Include="AvalonTM.Permissions.Android" Version="1.0.3" />
+	<PackageReference Include="AvalonTM.Permissions" Version="1.0.4" />
+    <PackageReference Include="AvalonTM.MediaPlugin" Version="1.0.4" />
 
   </ItemGroup>
 

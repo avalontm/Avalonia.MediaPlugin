@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-ios</TargetFramework>
+    <TargetFramework>net6.0-ios</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
-	  <Version>1.0.3</Version>
+	  <Version>1.0.4</Version>
 	  <Nullable>enable</Nullable>
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <PackageId>AvalonTM.Permissions.iOS</PackageId>
@@ -18,7 +18,7 @@
   </PropertyGroup>
 	
   <ItemGroup>
-	  <PackageReference Include="AvalonTM.Permissions" Version="1.0.0" />
+	  <PackageReference Include="AvalonTM.Permissions" Version="1.0.4" />
   </ItemGroup>
 	
   <ItemGroup>

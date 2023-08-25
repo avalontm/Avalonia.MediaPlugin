@@ -27,6 +27,7 @@ protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseMediaPlugin(this)
+			.UsePermissions()
             .UseReactiveUI();
     }
 ```
@@ -41,6 +42,7 @@ protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
         return base.CustomizeAppBuilder(builder)
             .WithInterFont()
             .UseMediaPlugin()
+			.UsePermissions()
             .UseReactiveUI();
     }
 ```
